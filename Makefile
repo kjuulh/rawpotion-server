@@ -9,16 +9,16 @@ build-prod:
 test: unittest integrationtest 
 
 unittest:
-	dotnet test MealplannerUnittests
+	dotnet test RawPotionUnittests
 
 integrationtest: 
-	dotnet test MealplannerIntegrationtests
+	dotnet test RawPotionIntegrationtests
 
 run:
-	dotnet run --project MealplannerServer
+	dotnet run --project RawPotionServer
 
 deps:
 	dotnet restore
 
 docker-build:
-	docker build --tag kjuulh/mealplanner-server:${MEALPLANNER_VERSION} .
+	docker build --tag kjuulh/RawPotion-server:${RawPotion_VERSION} .

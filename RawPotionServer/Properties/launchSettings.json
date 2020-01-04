@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MealplannerServer": {
+    "RawPotionServer": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

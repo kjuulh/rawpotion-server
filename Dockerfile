@@ -1,21 +1,21 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY MealplannerServer/*.csproj ./MealplannerServer/
-COPY MealplannerUnittests/*.csproj ./MealplannerUnittests/
-COPY MealplannerIntegrationtests/*.csproj ./MealplannerIntegrationtests/
-COPY MealplannerCore/*.csproj ./MealplannerCore/
+COPY RawPotionServer/*.csproj ./RawPotionServer/
+COPY RawPotionUnittests/*.csproj ./RawPotionUnittests/
+COPY RawPotionIntegrationtests/*.csproj ./RawPotionIntegrationtests/
+COPY RawPotionCore/*.csproj ./RawPotionCore/
 RUN dotnet restore
 
 # copy everything else and build app
 COPY . .
-WORKDIR /app/MealplannerServer
+WORKDIR /app/RawPotionServer
 RUN dotnet publish -c Release -o out
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
-COPY --from=build /app/MealplannerServer/out ./
-ENTRYPOINT ["dotnet", "MealplannerServer.dll"]
+COPY --from=build /app/RawPotionServer/out ./
+ENTRYPOINT ["dotnet", "RawPotionServer.dll"]
