@@ -1,0 +1,59 @@
+name: ASP.NET Core Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.0.100
+      - name: Dotnet restore
+        run: make deps
+      - name: Dotnet build
+        run: make build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.0.100
+      - name: Dotnet restore
+        run: make deps
+      - name: Dotnet test
+        run: make test
+
+  integrationtest:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.0.100
+      - name: Dotnet restore
+        run: make deps
+      - name: Dotnet integrationtest
+        run: make integrationtest
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [test, integrationtest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: kjuulh/rawpotion/server
+          username: kjuulh
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          snapshot: true

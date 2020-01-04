@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="prometheus-net.AspNetCore" Version="3.4.0" />
+      <PackageReference Include="Rollbar" Version="3.7.0" />
+      <PackageReference Include="Rollbar.NetCore.AspNet" Version="3.7.0" />
+      <PackageReference Include="Rollbar.PlugIns.Serilog" Version="3.7.0" />
+      <PackageReference Include="serilog" Version="2.9.0" />
+      <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RawPotionCore\RawPotionCore.csproj" />
+    </ItemGroup>
+
+</Project>
