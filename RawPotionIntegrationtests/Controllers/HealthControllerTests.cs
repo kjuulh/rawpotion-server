@@ -1,9 +1,10 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using RawPotionServer;
-using RawPotionServer.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
+using RawPotionServer;
+using RawPotionServer.Controllers;
 using Xunit;
 
 namespace RawPotionIntegrationtests.Controllers
@@ -21,6 +22,7 @@ namespace RawPotionIntegrationtests.Controllers
 
         public HealthControllerTests(WebApplicationFactory<Startup> factory)
         {
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
             _factory = factory;
         }
 
