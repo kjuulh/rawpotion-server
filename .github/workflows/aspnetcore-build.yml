@@ -52,7 +52,7 @@ jobs:
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: kjuulh/rawpotion/server
+          name: kjuulh/rawpotion-server/server
           username: kjuulh
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
